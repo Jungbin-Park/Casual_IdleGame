@@ -46,6 +46,13 @@ public class PoolManager
 {
     public Dictionary<string, IPool> pools = new Dictionary<string, IPool>();
 
+    Transform baseObj = null;
+
+    public void Init(Transform t)
+    {
+        baseObj = t;
+    }
+
     public IPool Pop(string path)
     {
         if(pools.ContainsKey(path) == false)
@@ -62,6 +69,7 @@ public class PoolManager
     private GameObject CreatePool(string path)
     {
         GameObject go = new GameObject(path + " Root");
+        go.transform.SetParent(baseObj);
         Pool pool = new Pool();
 
         pools.Add(path, pool);

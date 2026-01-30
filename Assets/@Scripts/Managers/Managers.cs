@@ -24,6 +24,7 @@ public class Managers : MonoBehaviour
         {
             s_instance = this;
 
+            Pool.Init(transform);
             DontDestroyOnLoad(this.gameObject);
         }
         else
