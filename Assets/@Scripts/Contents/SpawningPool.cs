@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class SpawningPool : MonoBehaviour
 {
-    // 여러 마리가 몇 초마다 수시로 스폰
-    [SerializeField]
-    GameObject monsterPrefab;
-
     [SerializeField]
     int m_Count;
     [SerializeField]
@@ -41,8 +37,6 @@ public class SpawningPool : MonoBehaviour
                 value.transform.position = pos;
                 value.transform.LookAt(Vector3.zero);
             });
-
-            StartCoroutine(PushCoroutine(go));
         }
 
         yield return new WaitForSeconds(m_SpawnTime);
@@ -50,9 +44,4 @@ public class SpawningPool : MonoBehaviour
         StartCoroutine(CoSpawn());
     }
 
-    IEnumerator PushCoroutine(GameObject obj)
-    {
-        yield return new WaitForSeconds(1.0f);
-        Managers.Pool.pools["Monster"].Push(obj);
-    }
 }

@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : CreatureController
 {
     [SerializeField]
     float m_Speed;
-    Animator animator;
 
     bool isSpawn = false;
 
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
 
     public void Init()
     {
@@ -59,11 +54,5 @@ public class MonsterController : MonoBehaviour
 
     }
 
-    private void AnimatorChange(string temp)
-    {
-        animator.SetBool("isIdle", false);
-        animator.SetBool("isMove", false);
-
-        animator.SetBool(temp, true);
-    }
+    
 }
