@@ -10,8 +10,9 @@ public class CreatureController : MonoBehaviour
     public double atk;
     public float atkSpeed;
 
-    protected float attackRange = 3.0f;    // 공격 범위
-    protected float targetRange = 5.0f;    // 추격 범위
+    protected float attackRange = 1.0f;    // 공격 범위
+    protected float targetRange = 3.0f;    // 추격 범위
+    protected bool isAttack = false;
 
     protected Transform target;
 
@@ -22,6 +23,8 @@ public class CreatureController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
+
+    protected void InitAttack() => isAttack = false;
 
     protected void AnimatorChange(string temp)
     {
@@ -39,6 +42,8 @@ public class CreatureController : MonoBehaviour
 
     protected virtual void Bullet()
     {
+        Debug.Log("Bullet Event");
+
         Managers.Pool.Pop("Bullet").Pop((value) =>
         {
 
