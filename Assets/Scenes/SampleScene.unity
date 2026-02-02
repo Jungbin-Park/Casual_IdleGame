@@ -471,7 +471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4f52094211e0144bc7261645e958a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 6261913299639084238, guid: 85506aab95c84ef48b07d09ad19745f4, type: 3}
   m_Count: 5
   m_SpawnTime: 2
 --- !u!1 &4860244418530841280 stripped
@@ -538,6 +537,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5752330121694979056, guid: c8b8ccf4138af1547af7216628cae11f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5204153601981368443}
+    - targetCorrespondingSourceObject: {fileID: 5752330121694979056, guid: c8b8ccf4138af1547af7216628cae11f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5204153601981368445}
   m_SourcePrefab: {fileID: 100100000, guid: c8b8ccf4138af1547af7216628cae11f, type: 3}
 --- !u!95 &5204153601981368443
 Animator:
@@ -560,6 +562,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5204153601981368445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4860244418530841280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c523f6af4be178642a305f0e1a343f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  atk: 1
+  atkSpeed: 1
+  bulletTr: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

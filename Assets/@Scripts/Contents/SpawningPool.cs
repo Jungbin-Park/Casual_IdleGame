@@ -10,6 +10,9 @@ public class SpawningPool : MonoBehaviour
     [SerializeField]
     float m_SpawnTime;
 
+    public static List<MonsterController> monsters = new List<MonsterController>();
+    public static List<PlayerController> players = new List<PlayerController>();
+
     private void Start()
     {
         StartCoroutine(CoSpawn());
@@ -36,6 +39,7 @@ public class SpawningPool : MonoBehaviour
                 value.GetComponent<MonsterController>().Init();
                 value.transform.position = pos;
                 value.transform.LookAt(Vector3.zero);
+                monsters.Add(value.GetComponent<MonsterController>());
             });
         }
 
