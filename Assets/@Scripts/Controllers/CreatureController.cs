@@ -10,8 +10,8 @@ public class CreatureController : MonoBehaviour
     public double atk;
     public float atkSpeed;
 
-    protected float attackRange = 1.0f;    // 공격 범위
-    protected float targetRange = 3.0f;    // 추격 범위
+    protected float attackRange = 3.0f;    // 공격 범위
+    protected float targetRange = 5.0f;    // 추격 범위
     protected bool isAttack = false;
 
     protected Transform target;
@@ -46,7 +46,8 @@ public class CreatureController : MonoBehaviour
 
         Managers.Pool.Pop("Bullet").Pop((value) =>
         {
-
+            value.transform.position = bulletTr.position;
+            value.GetComponent<BulletController>().Init(target, 10, "CH_01");
         });
     }
 
