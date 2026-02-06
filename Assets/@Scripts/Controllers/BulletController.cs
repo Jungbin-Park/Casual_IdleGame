@@ -57,7 +57,8 @@ public class BulletController : MonoBehaviour
             if(target != null)
             {
                 isHit = true;
-                target.GetComponent<CreatureController>().hp -= damage;
+                target.GetComponent<MonsterController>().GetDamage(10);
+
                 projectiles[creatureName].gameObject.SetActive(false);
                 muzzles[creatureName].Play();
 

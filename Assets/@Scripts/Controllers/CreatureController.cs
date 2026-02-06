@@ -9,6 +9,7 @@ public class CreatureController : MonoBehaviour
     public double hp;
     public double atk;
     public float atkSpeed;
+    public bool isDead = false;
 
     protected float attackRange = 3.0f;    // 공격 범위
     protected float targetRange = 5.0f;    // 추격 범위

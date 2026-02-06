@@ -10,6 +10,13 @@ public class MonsterController : CreatureController
 
     bool isSpawn = false;
 
+    protected override void Start()
+    {
+        base.Start();
+        hp = 5;
+
+    }
+
 
     public void Init()
     {
@@ -35,6 +42,25 @@ public class MonsterController : CreatureController
         isSpawn = true;
     }
 
+    public void GetDamage(double damage)
+    {
+        hp -= damage;
+
+        if(hp <= 0)
+        {
+            isDead = true;
+            SpawningPool.monsters.Remove(this);
+
+            var smokeObj = Managers.Pool.Pop("Smoke").Pop((value) =>
+            {
+                value.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+                Managers.s_instance.ReturnPool(value.GetComponent<ParticleSystem>().duration, value, "Smoke");
+            });
+
+            Managers.Pool.pools["Monster"].Push(this.gameObject);
+        }
+    }
+
     private void Update()
     {
         transform.LookAt(Vector3.zero);
@@ -54,5 +80,9 @@ public class MonsterController : CreatureController
 
     }
 
-    
+    IEnumerator CoReturnSmoke(float timer, GameObject gameObject, string path)
+    {
+        yield return new WaitForSeconds(timer);
+        Managers.Pool.pools[path].Push(gameObject);
+    }
 }
