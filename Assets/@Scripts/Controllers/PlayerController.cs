@@ -18,11 +18,11 @@ public class PlayerController : CreatureController
 
     private void Update()
     {
-        // 타겟이 없으면 시작 지점으로 이동
-        if(target == null)
-        {
-            FindClosestTarget(SpawningPool.monsters.ToArray());
+        FindClosestTarget(SpawningPool.monsters.ToArray());
 
+        // 타겟이 없으면 시작 지점으로 이동
+        if (target == null)
+        {
             float targetPos = Vector3.Distance(transform.position, startPos);
             if(targetPos > 0.1f)
             {
@@ -35,11 +35,15 @@ public class PlayerController : CreatureController
                 transform.rotation = rot;
                 AnimatorChange("isIdle");
             }
-
             return;
         }
 
+        // ================
         // 타겟이 있는 경우
+        // ================
+
+        // 타겟이 죽은 상태면 다시 찾기
+        if (target.GetComponent<CreatureController>().isDead) FindClosestTarget(SpawningPool.monsters.ToArray());
 
         float targetDistance = Vector3.Distance(transform.position, target.position);
         // 현재 타겟이 추적 범위 안에 있지만 공격 범위 밖인 경우

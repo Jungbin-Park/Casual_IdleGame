@@ -14,12 +14,12 @@ public class MonsterController : CreatureController
     {
         base.Start();
         hp = 5;
-
     }
-
 
     public void Init()
     {
+        isDead = false;
+        hp = 5;
         StartCoroutine(CoSpawnStart());
     }
 
@@ -44,6 +44,13 @@ public class MonsterController : CreatureController
 
     public void GetDamage(double damage)
     {
+        if(isDead) return;
+
+        Managers.Pool.Pop("UI_HitText").Pop((value) =>
+        {
+            value.GetComponent<UI_HitText>().Init(transform.position, damage, false);
+        });
+
         hp -= damage;
 
         if(hp <= 0)

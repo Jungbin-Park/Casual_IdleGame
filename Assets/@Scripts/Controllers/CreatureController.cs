@@ -43,7 +43,7 @@ public class CreatureController : MonoBehaviour
 
     protected virtual void Bullet()
     {
-        Debug.Log("Bullet Event");
+        if (target == null) return;
 
         Managers.Pool.Pop("Bullet").Pop((value) =>
         {
