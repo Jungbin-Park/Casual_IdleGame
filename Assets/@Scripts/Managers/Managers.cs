@@ -37,4 +37,15 @@ public class Managers : MonoBehaviour
     {
         return Instantiate(Resources.Load<GameObject>(path));
     }
+
+    public void ReturnPool(float timer, GameObject go, string path)
+    {
+        StartCoroutine(CoReturnPool(timer, go, path));
+    }
+
+    IEnumerator CoReturnPool(float time, GameObject go, string path)
+    {
+        yield return new WaitForSeconds(time);
+        Pool.pools[path].Push(go);
+    }
 }

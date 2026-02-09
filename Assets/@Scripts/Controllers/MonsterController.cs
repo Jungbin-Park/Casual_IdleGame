@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : CreatureController
 {
     [SerializeField]
     float m_Speed;
-    Animator animator;
 
     bool isSpawn = false;
 
-    private void Start()
+    protected override void Start()
     {
-        animator = GetComponent<Animator>();
+        base.Start();
+        hp = 5;
     }
 
     public void Init()
     {
+        isDead = false;
+        hp = 5;
         StartCoroutine(CoSpawnStart());
     }
 
@@ -40,6 +42,40 @@ public class MonsterController : MonoBehaviour
         isSpawn = true;
     }
 
+    public void GetDamage(double damage)
+    {
+        if(isDead) return;
+
+        Managers.Pool.Pop("UI_HitText").Pop((value) =>
+        {
+            value.GetComponent<UI_HitText>().Init(transform.position, damage, false);
+        });
+
+        hp -= damage;
+
+        // »ç¸Á Ã³¸®
+        if(hp <= 0)
+        {
+            isDead = true;
+            SpawningPool.monsters.Remove(this);
+
+            // ½º¸ðÅ© ÀÌÆåÆ®
+            Managers.Pool.Pop("Smoke").Pop((value) =>
+            {
+                value.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+                Managers.s_instance.ReturnPool(value.GetComponent<ParticleSystem>().duration, value, "Smoke");
+            });
+
+            // ÄÚÀÎ ¶³±¸±â
+            Managers.Pool.Pop("COIN_PARENT").Pop((value) =>
+            {
+                value.GetComponent<COIN_PARENT>().Init(transform.position);
+            });
+
+            Managers.Pool.pools["Monster"].Push(this.gameObject);
+        }
+    }
+
     private void Update()
     {
         transform.LookAt(Vector3.zero);
@@ -59,11 +95,9 @@ public class MonsterController : MonoBehaviour
 
     }
 
-    private void AnimatorChange(string temp)
+    IEnumerator CoReturnSmoke(float timer, GameObject gameObject, string path)
     {
-        animator.SetBool("isIdle", false);
-        animator.SetBool("isMove", false);
-
-        animator.SetBool(temp, true);
+        yield return new WaitForSeconds(timer);
+        Managers.Pool.pools[path].Push(gameObject);
     }
 }

@@ -33,7 +33,7 @@ class Pool : IPool
     public void Push(GameObject obj, Action<GameObject> action = null)
     {
         pool.Enqueue(obj); // Enqueue = push
-        obj.transform.parent = Root;
+        obj.transform.SetParent(Root);
         obj.SetActive(false);
         if(action != null)
         {
@@ -81,7 +81,7 @@ public class PoolManager
     private void Push(string path)
     {
         var go = Managers.s_instance.InstantiatePath(path);
-        go.transform.parent = pools[path].Root;
+        go.transform.SetParent(pools[path].Root);
 
         pools[path].Push(go);
     }
