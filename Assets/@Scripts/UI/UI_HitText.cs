@@ -29,7 +29,7 @@ public class UI_HitText : MonoBehaviour
         // 텍스트 설정
         target = pos;
         hitText.text = damage.ToString();
-        transform.SetParent(UI_BaseCanvas.instance.transform);
+        transform.SetParent(UI_BaseCanvas.instance.GetUILayer(1));
         upRange = 0.0f;
 
         // 크리티컬이면

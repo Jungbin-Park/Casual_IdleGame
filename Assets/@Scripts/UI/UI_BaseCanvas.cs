@@ -16,4 +16,13 @@ public class UI_BaseCanvas : MonoBehaviour
         }
         else Destroy(this.gameObject);
     }
+
+    public Transform ui_coin;
+    [SerializeField]
+    Transform layer;
+
+    public Transform GetUILayer(int index)
+    {
+        return layer.GetChild(index);
+    }
 }

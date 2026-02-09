@@ -53,15 +53,23 @@ public class MonsterController : CreatureController
 
         hp -= damage;
 
+        // »ç¸Á Ã³¸®
         if(hp <= 0)
         {
             isDead = true;
             SpawningPool.monsters.Remove(this);
 
-            var smokeObj = Managers.Pool.Pop("Smoke").Pop((value) =>
+            // ½º¸ðÅ© ÀÌÆåÆ®
+            Managers.Pool.Pop("Smoke").Pop((value) =>
             {
                 value.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
                 Managers.s_instance.ReturnPool(value.GetComponent<ParticleSystem>().duration, value, "Smoke");
+            });
+
+            // ÄÚÀÎ ¶³±¸±â
+            Managers.Pool.Pop("COIN_PARENT").Pop((value) =>
+            {
+                value.GetComponent<COIN_PARENT>().Init(transform.position);
             });
 
             Managers.Pool.pools["Monster"].Push(this.gameObject);
