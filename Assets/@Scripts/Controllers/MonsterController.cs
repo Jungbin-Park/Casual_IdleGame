@@ -72,6 +72,15 @@ public class MonsterController : CreatureController
                 value.GetComponent<COIN_PARENT>().Init(transform.position);
             });
 
+            // Temp
+            for(int i = 0; i < 3; i++)
+            {
+                Managers.Pool.Pop("Item_OBJ").Pop((value) =>
+                {
+                    value.GetComponent<ITEM_OBJ>().Init(transform.position);
+                });
+            }
+
             Managers.Pool.pools["Monster"].Push(this.gameObject);
         }
     }
