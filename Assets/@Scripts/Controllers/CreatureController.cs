@@ -11,8 +11,8 @@ public class CreatureController : MonoBehaviour
     public float atkSpeed;
     public bool isDead = false;
 
-    protected float attackRange = 3.0f;    // °ø°Ý ¹üÀ§
-    protected float targetRange = 5.0f;    // Ãß°Ý ¹üÀ§
+    protected float attackRange = 3.0f;    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    protected float targetRange = 5.0f;    // ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
     protected bool isAttack = false;
 
     protected Transform target;
