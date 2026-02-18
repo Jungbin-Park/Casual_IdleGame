@@ -33,7 +33,7 @@ public class MonsterController : CreatureController
         {
             current += Time.deltaTime;
             percent = current / 0.2f;
-            float lerpPos = Mathf.Lerp(start, end, percent);    // ¼±Çüº¸°£ : start ºÎÅÍ end±îÁö Æ¯Á¤ ½Ã°£¼Óµµ·Î ÀÌµ¿
+            float lerpPos = Mathf.Lerp(start, end, percent);    // Â¼Â±Ã‡Ã¼ÂºÂ¸Â°Â£ : start ÂºÃÃ…Ã endÂ±Ã®ÃÃ¶ Ã†Â¯ÃÂ¤ Â½ÃƒÂ°Â£Â¼Ã“ÂµÂµÂ·Ã Ã€ÃŒÂµÂ¿
             transform.localScale = new Vector3(lerpPos, lerpPos, lerpPos);
             yield return null;
         }
@@ -53,24 +53,33 @@ public class MonsterController : CreatureController
 
         hp -= damage;
 
-        // »ç¸Á Ã³¸®
+        // Â»Ã§Â¸Ã ÃƒÂ³Â¸Â®
         if(hp <= 0)
         {
             isDead = true;
             SpawningPool.monsters.Remove(this);
 
-            // ½º¸ğÅ© ÀÌÆåÆ®
+            // Â½ÂºÂ¸Ã°Ã…Â© Ã€ÃŒÃ†Ã¥Ã†Â®
             Managers.Pool.Pop("Smoke").Pop((value) =>
             {
                 value.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
                 Managers.s_instance.ReturnPool(value.GetComponent<ParticleSystem>().duration, value, "Smoke");
             });
 
-            // ÄÚÀÎ ¶³±¸±â
+            // Ã„ÃšÃ€Ã Â¶Â³Â±Â¸Â±Ã¢
             Managers.Pool.Pop("COIN_PARENT").Pop((value) =>
             {
                 value.GetComponent<COIN_PARENT>().Init(transform.position);
             });
+
+            // Temp
+            for(int i = 0; i < 3; i++)
+            {
+                Managers.Pool.Pop("Item_OBJ").Pop((value) =>
+                {
+                    value.GetComponent<ITEM_OBJ>().Init(transform.position);
+                });
+            }
 
             Managers.Pool.pools["Monster"].Push(this.gameObject);
         }

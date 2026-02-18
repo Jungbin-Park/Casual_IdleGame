@@ -22,17 +22,17 @@ public class UI_HitText : MonoBehaviour
 
     public void Init(Vector3 pos, double damage, bool critical = false)
     {
-        // �ؽ�Ʈ ��ġ ������ �ο�
+        // ÅØ½ºÆ® À§Ä¡ ·£´ý¼º ºÎ¿©
         pos.x += Random.Range(-0.3f, 0.3f);
         pos.z += Random.Range(-0.3f, 0.3f);
 
-        // �ؽ�Ʈ ����
+        // ÅØ½ºÆ® ¼³Á¤
         target = pos;
         hitText.text = damage.ToString();
         transform.SetParent(UI_BaseCanvas.instance.GetUILayer(1));
         upRange = 0.0f;
 
-        // ũ��Ƽ���̸�
+        // Å©¸®Æ¼ÄÃÀÌ¸é
         criticalObj.SetActive(critical);
         //hitText.colorGradient = 
 
