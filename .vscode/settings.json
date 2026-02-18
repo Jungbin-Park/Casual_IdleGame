@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Casual_Idle.sln"
+    "dotnet.defaultSolution": "Casual_IdleGame.sln"
 }
