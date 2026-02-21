@@ -4,14 +4,17 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-// ¸ðµç ¸Å´ÏÀú ½ºÅ©¸³Æ®ÀÇ ÁýÇÕÃ¼
+// ï¿½ï¿½ï¿½ ï¿½Å´ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼
 
 public class Managers : MonoBehaviour
 {
     public static Managers s_instance = null;
 
     private static PoolManager pool = new PoolManager();
+    private static PlayerManager player = new PlayerManager();
+
     public static PoolManager Pool { get { return pool; } }
+    public static PlayerManager Player { get { return player; } }
 
     private void Awake()
     {
@@ -20,7 +23,7 @@ public class Managers : MonoBehaviour
 
     private void Init()
     {
-        if(s_instance == null)
+        if (s_instance == null)
         {
             s_instance = this;
 
